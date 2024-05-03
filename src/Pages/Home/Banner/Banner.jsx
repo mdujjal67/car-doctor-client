@@ -5,10 +5,10 @@ import img4 from "../../../assets/images/banner/4.jpg"
 const Banner = () => {
     return (
         <div>
-            <div className="carousel w-full">
-                <div id="slide1" className="carousel-item relative w-full">
-                    <img src={img1} className="w-full" />
-                    <div className="absolute flex items-center space-y-7 h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21,21,21,0)] w-full">
+            <div className="carousel w-full mb-[100px]">
+                <div id="slide1" className="carousel-item relative w-full h-[600px] object-cover">
+                    <img src={img1} className="w-full rounded-xl" />
+                    <div className="absolute flex items-center space-y-7 h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21,21,21,0)] w-full rounded-xl">
                        <div className="text-white pl-10 w-[480px]">
                             <h1 className="text-white text-7xl font-bold">Affordable Price For Car Servicing</h1>
                             <p className="text-white py-8 text-2xl">There are many variations of passages of  available, but the majority have suffered alteration in some form</p>
@@ -23,9 +23,9 @@ const Banner = () => {
                         <a href="#slide2" className="btn btn-circle hover:bg-orange-600 hover:text-white text-xl hover:border-0">❯</a>
                     </div>
                 </div>
-                <div id="slide2" className="carousel-item relative w-full">
-                    <img src={img2} className="w-full" />
-                    <div className="absolute flex items-center space-y-7 h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21,21,21,0)] w-full">
+                <div id="slide2" className="carousel-item relative w-full h-[600px] object-cover">
+                    <img src={img2} className="w-full rounded-xl" />
+                    <div className="absolute flex items-center space-y-7 h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21,21,21,0)] w-full rounded-xl">
                        <div className="text-white pl-10 w-[480px]">
                             <h1 className="text-white text-7xl font-bold">Affordable Price For Car Servicing</h1>
                             <p className="text-white py-8 text-2xl">There are many variations of passages of  available, but the majority have suffered alteration in some form</p>
@@ -40,9 +40,9 @@ const Banner = () => {
                         <a href="#slide3" className="btn btn-circle hover:bg-orange-600 hover:text-white text-xl hover:border-0">❯</a>
                     </div>
                 </div>
-                <div id="slide3" className="carousel-item relative w-full">
-                    <img src={img3} className="w-full" />
-                    <div className="absolute flex items-center space-y-7 h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21,21,21,0)] w-full">
+                <div id="slide3" className="carousel-item relative w-full h-[600px] object-cover">
+                    <img src={img3} className="w-full rounded-xl" />
+                    <div className="absolute flex items-center space-y-7 h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21,21,21,0)] w-full rounded-xl">
                        <div className="text-white pl-10 w-[480px]">
                             <h1 className="text-white text-7xl font-bold">Affordable Price For Car Servicing</h1>
                             <p className="text-white py-8 text-2xl">There are many variations of passages of  available, but the majority have suffered alteration in some form</p>
@@ -57,9 +57,9 @@ const Banner = () => {
                         <a href="#slide4" className="btn btn-circle hover:bg-orange-600 hover:text-white text-xl hover:border-0">❯</a>
                     </div>
                 </div>
-                <div id="slide4" className="carousel-item relative w-full">
-                    <img src={img4} className="w-full" />
-                    <div className="absolute flex items-center space-y-7 h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21,21,21,0)] w-full">
+                <div id="slide4" className="carousel-item relative w-full h-[600px] object-cover">
+                    <img src={img4} className="w-full rounded-xl" />
+                    <div className="absolute flex items-center space-y-7 h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21,21,21,0)] w-full rounded-xl">
                        <div className="text-white pl-10 w-[480px]">
                             <h1 className="text-white text-7xl font-bold">Affordable Price For Car Servicing</h1>
                             <p className="text-white py-8 text-2xl">There are many variations of passages of  available, but the majority have suffered alteration in some form</p>
