@@ -3,10 +3,35 @@ import { IoLogoGithub } from "react-icons/io";
 // import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import loginImg from '../../assets/images/login/login.svg'
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import toast from "react-hot-toast";
 const SignUp = () => {
+    
+    const { createUser } = useContext(AuthContext)
 
     const handleSignUp = (event) => {
         event.preventDefault()
+        const form = event.target
+        const name = form.name.value
+        const email = form.email.value
+        const password = form.password.value
+        const userInfo = {name, email, password}
+        console.log(userInfo);
+
+        createUser(email, password)
+        .then(result => {
+            const user = result.user
+            console.log(user)
+            toast.success('User Registered Successfully!');
+            // form.reset();
+            
+        })
+        .catch((error) => {
+            console.log(error)
+            return toast.error('This User Already Exists!');
+        });
+        
     }
 
     return (
@@ -20,6 +45,11 @@ const SignUp = () => {
                         <h1 className="text-2xl text-center font-bold mt-10">Sign Up</h1>
                         <form onSubmit={handleSignUp} className="card-body">
 
+                            {/* This is for Name field */}
+                            <label>Name</label>
+                            <div className="form-control">
+                                <input type="text" name="name" placeholder="Your name" className="input input-bordered -mt-1 mb-3"></input>
+                            </div>
                             {/* This is for Email field */}
                             <label>Email</label>
                             <div className="form-control">
@@ -33,13 +63,6 @@ const SignUp = () => {
                                     name="password"
                                     placeholder="Confirm Password"
                                     className="input input-bordered -mt-1 " />
-
-                                {/* input field error show */}
-                                {/* <div>
-                                    {
-                                        loginError && <p className="text-[12px] text-red-500">{loginError}</p>
-                                    }
-                                </div> */}
                                 <label className="label">
                                     <Link to='/forgot-password' className="label-text-alt link link-hover">Forgot password?</Link>
                                 </label>

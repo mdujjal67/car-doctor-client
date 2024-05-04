@@ -3,15 +3,39 @@ import { IoLogoGithub } from "react-icons/io";
 // import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import loginImg from '../../assets/images/login/login.svg'
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import toast from "react-hot-toast";
 const Login = () => {
 
+    const { signIn } = useContext(AuthContext)
+
+
     const handleLogin = (event) => {
-        event.preventDefault()
+        event.preventDefault();
+        const form = event.target
+        const email = form.email.value
+        const password = form.password.value
+        const userInfo = {email, password}
+        console.log(userInfo);
+
+        signIn(email, password)
+        .then(result => {
+            const user = result.user
+            console.log(user)
+            toast.success('Login Successful!');
+            // form.reset();
+        })
+        .catch((error) => {
+            console.log(error)
+            return toast.error('Please try again!');
+        });
+        
     }
 
     return (
         <div>
-            <div className="hero min-h-screen bg-gray-50 container mb-[80px] mx-auto">
+            <div className="hero min-h-screen bg-gray-50 container mb-[80px] mx-auto py-10">
                 <div className="hero-content flex-row flex gap-20">
                     <div className="lg:w-1/2">
                         <img src={loginImg} alt="" />
