@@ -2,21 +2,39 @@ import { useLoaderData } from "react-router-dom";
 import checkout from '../../assets/images/checkout/checkout.png'
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import toast from "react-hot-toast";
 
-const CheckOut = () => {
+const Booking = () => {
     const service = useLoaderData();
     const {user} = useContext(AuthContext)
-    const { title, _id, price } = service
+    const { title, _id, price, img } = service
 
     const handleCheckout = (event) => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
         const email = user?.email;
-        const phone = form.phone.value;
+        const price = form.price.value;
         const textarea = form.textarea.value;
-        const checkOutInfo = {email, name, phone, textarea}
-        console.log(checkOutInfo);
+        const bookingInfo = {email, name, price, textarea, title, img, _id}
+        console.log(bookingInfo);
+
+        fetch('http://localhost:5000/booking', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(bookingInfo)
+        })
+        .then(res => res.json())
+        .then(data =>{
+            console.log(data)
+           if(data.insertedId){
+                toast.success('Booking Successful!');
+                form.reset()
+           }
+           
+        })
     }
     return (
         <div>
@@ -35,7 +53,7 @@ const CheckOut = () => {
                         <input type="date" placeholder="Date"  className="input" required />
                     </div>
                     <div className="form-control">
-                        <input type="text" name="phone" defaultValue={user?.phone} placeholder="Your Phone" className="input" required />
+                        <input type="text" name="price" defaultValue={'$' +price} placeholder="price" className="input" required />
                     </div>
                     <div className="form-control">
                         <input type="email" name="email" defaultValue={user?.email} placeholder="Your Email" className="input" required />
@@ -52,4 +70,4 @@ const CheckOut = () => {
     );
 };
 
-export default CheckOut;
+export default Booking;

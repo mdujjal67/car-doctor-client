@@ -10,7 +10,7 @@ const ServicesCard = ({ service }) => {
                 <h2 className="card-title font-bold text-2xl">{title}</h2>
                 <p className="font-bold text-xl text-[#ff3811]">Price: ${price}</p>
                 <div className="card-actions justify-end">
-                    <Link to={`/checkout/${_id}`}>
+                    <Link to={`/booking/${_id}`}>
                         <button className="btn"><FaArrowRightLong className="text-[#ff3811]"/></button>
                     </Link>
                 </div>
