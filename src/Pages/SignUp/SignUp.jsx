@@ -3,9 +3,9 @@ import { IoLogoGithub } from "react-icons/io";
 // import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import loginImg from '../../assets/images/login/login.svg'
 import { Link } from "react-router-dom";
-const Login = () => {
+const SignUp = () => {
 
-    const handleLogin = (event) => {
+    const handleSignUp = (event) => {
         event.preventDefault()
     }
 
@@ -17,8 +17,8 @@ const Login = () => {
                         <img src={loginImg} alt="" />
                     </div>
                     <div className="card lg:w-1/2 w-[300px] shadow-lg border bg-base-100">
-                        <h1 className="text-2xl text-center font-bold mt-10">Login</h1>
-                        <form onSubmit={handleLogin} className="card-body">
+                        <h1 className="text-2xl text-center font-bold mt-10">Sign Up</h1>
+                        <form onSubmit={handleSignUp} className="card-body">
 
                             {/* This is for Email field */}
                             <label>Email</label>
@@ -44,12 +44,12 @@ const Login = () => {
                                     <Link to='/forgot-password' className="label-text-alt link link-hover">Forgot password?</Link>
                                 </label>
                                 <label className="">
-                                    <p className="text-[14px] w-[220px] mx-auto mt-2 text-[#00000082]">Do not have an account? <Link to='/signUp' className="hover:link font-semibold text-[14px] text-[#ff3811]">Sign Up</Link>
+                                    <p className="text-[14px] w-[220px] mx-auto mt-2 text-[#00000082]">Already have an account? <Link to='/login' className="hover:link font-semibold text-[14px] text-[#ff3811]">Login</Link>
                                     </p>
                                 </label>
                             </div>
                             <div className="form-control mt-3">
-                                <button className="btn border-none bg-[#ff3811] hover:bg-gray-400 text-white">Login</button>
+                                <button className="btn border-none bg-[#ff3811] hover:bg-gray-400 text-white">Sign Up</button>
                             </div>
                         </form>
 
@@ -74,4 +74,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default SignUp;
