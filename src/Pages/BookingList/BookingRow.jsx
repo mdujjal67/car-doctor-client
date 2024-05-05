@@ -2,28 +2,9 @@ import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import PropTypes from "prop-types"
 
-const BookingRow = ({ booking }) => {
+const BookingRow = ({ booking, handleDelete }) => {
 
-    const handleDelete = id => {
-        const proceed = confirm('Are you sure you want to delete?')
-        if(proceed){
-            fetch(`http://localhost:5000/booking/${id}`, {
-                method: 'DELETE'
-            })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if(data.modifiedCount > 0){
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'Coffee Updated successfully',
-                        icon: 'success',
-                        confirmButtonText: 'Cool'
-                      })
-                }
-            })
-        }
-    }
+    
 
     const { user } = useContext(AuthContext)
     const { _id, name, title, price, date, img } = booking
@@ -65,6 +46,7 @@ const BookingRow = ({ booking }) => {
     );
 };
 BookingRow.propTypes = {
-    booking: PropTypes.object
+    booking: PropTypes.object,
+    handleDelete: PropTypes.func
 };
 export default BookingRow;
