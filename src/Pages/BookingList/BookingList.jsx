@@ -13,7 +13,7 @@ const BookingList = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => setBookings(data))
-    }, []);
+    }, [url]);
 
     const handleDelete = id => {
         // swet alart
@@ -24,7 +24,7 @@ const BookingList = () => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Yes, remove it!"
           })
         .then(result => {
             if(result.isConfirmed){
@@ -37,14 +37,36 @@ const BookingList = () => {
                     if(data.deletedCount > 0){
                         Swal.fire({
                             title: 'Success!',
-                            text: 'Your booking deleted!',
+                            text: 'Your booking removed!',
                             icon: 'success',
                             confirmButtonText: 'Cool'
                           });
-                          const remainingBooking = bookings.filter(booking => booking._id !== booking.id);
+                          const remainingBooking = bookings.filter(booking => booking._id !==id);
                           setBookings(remainingBooking)
                     }
                 })
+            }
+        })
+    }
+
+
+    const handleBookingConfirm = (id) => {
+        fetch(`http://localhost:5000/booking/${id}`, {
+            method: "PATCH",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({status: 'confirm'})
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            if(data.modifiedCount > 0){
+                const remaining = bookings.filter(booking => booking._id !== id);
+                const updated = bookings.find(booking => booking._id === id);
+                updated.status = 'confirm'
+                const newBookings = [updated, ...remaining]
+                setBookings(newBookings)
             }
         })
     }
@@ -58,11 +80,13 @@ const BookingList = () => {
                 <table className="table">
                     {/* head */}
                     <thead>
-                        <tr>
-                            <th>Service Name</th>
-                            <th>Customer Name</th>
-                            <th>Price</th>
-                            <th>Date</th>
+                        <tr className="bg-gray-100">
+                            <th></th>
+                            <th>Service Info.</th>
+                            <th>Customer Info.</th>
+                            <th>Service Cost</th>
+                            <th>Booking Date</th>
+                            <th>Booking Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,6 +95,7 @@ const BookingList = () => {
                             key={booking._id}
                             booking={booking}
                             handleDelete={handleDelete}
+                            handleBookingConfirm={handleBookingConfirm}
                             ></BookingRow>)
                         }
                     </tbody>
