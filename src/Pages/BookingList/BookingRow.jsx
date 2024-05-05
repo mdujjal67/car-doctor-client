@@ -3,16 +3,39 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import PropTypes from "prop-types"
 
 const BookingRow = ({ booking }) => {
-    const {user} = useContext(AuthContext)
-    const { name, title, price, date, img } = booking
+
+    const handleDelete = id => {
+        const proceed = confirm('Are you sure you want to delete?')
+        if(proceed){
+            fetch(`http://localhost:5000/booking/${id}`, {
+                method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if(data.modifiedCount > 0){
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Coffee Updated successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                      })
+                }
+            })
+        }
+    }
+
+    const { user } = useContext(AuthContext)
+    const { _id, name, title, price, date, img } = booking
     return (
         <div>
-            {/* row 1 */}
             <tr>
                 <th>
-                    <label>
-                        <input type="checkbox" className="checkbox" />
-                    </label>
+                    <div className="size-7">
+                    <button onClick={()=>handleDelete(_id)} className="btn btn-circle btn-xs btn-outline">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                    </div>
                 </th>
                 <td>
                     <div className="flex items-center gap-3">
