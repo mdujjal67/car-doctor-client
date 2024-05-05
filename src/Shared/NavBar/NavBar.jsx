@@ -8,13 +8,13 @@ import toast from "react-hot-toast";
 
 
 const NavBar = () => {
-    const {user, logOut} = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
     const handleLogOut = () => {
         logOut()
-        .then(()=>{
-            toast.success('Log Out Successful!');
-        })
-        .catch(error => console.log(error))
+            .then(() => {
+                toast.success('Log Out Successful!');
+            })
+            .catch(error => console.log(error))
     }
     const navItems = <>
         <li><Link to="/">Home</Link></li>
@@ -23,7 +23,9 @@ const NavBar = () => {
         <li><Link to="/blog">Blog</Link></li>
         <li><Link to="/contact">Contact</Link></li>
         {
-            user?.email ? <li><button onClick={handleLogOut}>Log Out</button></li> :<li><Link to="/login">Login</Link></li>
+            user?.email && (
+                <li><Link to="/bookingList">My Bookings</Link></li>
+            )
         }
     </>
     return (
@@ -38,7 +40,7 @@ const NavBar = () => {
                             {navItems}
                         </ul>
                     </div>
-                <Link to="/"><img src={logo} alt="logo-image" className="w-[70px] lg:w-24 ml-4 lg:ml-0" /></Link>
+                    <Link to="/"><img src={logo} alt="logo-image" className="w-[70px] lg:w-24 ml-4 lg:ml-0" /></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -46,9 +48,19 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <button><MdOutlineShoppingBag className="text-xl hover:text-orange-500"/></button>
-                    <button><IoSearch  className="text-xl mx-7 hover:text-orange-500"/></button>
-                    <button className="btn btn-outline btn-warning">Appointment</button>
+                    {user && (
+                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full">
+                                <img referrerPolicy="no-referrer" src={user?.photoURL || "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} alt="" className="bg-gray-100"/>
+                            </div>
+                        </label>
+                    )}
+                        {
+                            user?.email ? <button className="menu px-2 lg:mr-5 lg:ml-5 bg-[#ff3811] rounded-lg text-white hover:bg-gray-200 hover:text-gray-700" onClick={handleLogOut}>Log Out</button> : <button className="menu px-2 lg:mr-10 bg-[#ff3811] rounded-lg text-white hover:bg-gray-200 hover:text-gray-700"><Link to="/login">Login</Link></button>
+                        }
+                    <button><MdOutlineShoppingBag className="text-xl hover:text-orange-500" /></button>
+                    <button><IoSearch className="text-xl mx-5 hover:text-orange-500" /></button>
+                    <button className="btn btn-outline btn-warning hover:text-white">Appointment</button>
                 </div>
             </div>
         </div>

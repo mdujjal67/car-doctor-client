@@ -8,7 +8,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import toast from "react-hot-toast";
 const Login = () => {
 
-    const { signIn } = useContext(AuthContext)
+    const { signIn , googleLogin} = useContext(AuthContext)
 
 
     const handleLogin = (event) => {
@@ -31,6 +31,25 @@ const Login = () => {
             return toast.error('Please try again!');
         });
         
+    }
+    const handleSocialLogin = (socialProvider) => {
+        socialProvider()
+            .then(result => {
+                if (result.user) {
+                    // navigate(from)
+                }
+            })
+    }
+    //   for google login
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(result => {
+                console.log(result.user)
+                toast.success('Login Successful!');
+                // navigate(from);
+            })
+        
+       
     }
 
     return (
@@ -86,10 +105,10 @@ const Login = () => {
                         </div>
                         <div className="form-control mt-3 px-8 flex flex-row gap-5 mx-auto items-center pb-10">
                             <div className="bg-gray-100 hover:bg-gray-200 w-8 h-8 items-center mx-auto rounded-full">
-                                <IoLogoGithub className="text-black text-[20px] mt-1 mx-auto items-center" />
+                                <button><IoLogoGithub className="text-black text-[20px] ml-[6px] mt-[6px] mx-auto items-center" /></button>
                             </div>
                             <div className="bg-gray-100 hover:bg-gray-200 w-8 h-8 items-center mx-auto rounded-full">
-                                <FcGoogle className="text-black text-[20px] mt-1 mx-auto items-center" />
+                                <button onClick={()=>handleSocialLogin(handleGoogleLogin)}><FcGoogle className="text-black text-[20px] ml-[6px] mt-[6px] mx-auto items-center" /></button>
                             </div>
                         </div>
                     </div>
