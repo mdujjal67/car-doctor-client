@@ -55,7 +55,7 @@ const BookService = () => {
                         <input type="date" name="date" placeholder="Date"  className="input" required />
                     </div>
                     <div className="form-control">
-                        <input type="text" name="price" defaultValue={'$' +price} placeholder="price" className="input" required />
+                        <input type="text" name="price" defaultValue={'$' +price} placeholder="price" className="input" required readOnly />
                     </div>
                     <div className="form-control">
                         <input type="email" name="email" defaultValue={user?.email} placeholder="Your Email" className="input" required />
