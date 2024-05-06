@@ -2,13 +2,17 @@ import { FcGoogle } from "react-icons/fc";
 import { IoLogoGithub } from "react-icons/io";
 // import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import loginImg from '../../assets/images/login/login.svg'
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import toast from "react-hot-toast";
 const Login = () => {
 
-    const { signIn , googleLogin} = useContext(AuthContext)
+    const { signIn , googleLogin} = useContext(AuthContext);
+    
+    const navigate = useNavigate()
+    const location = useLocation()
+    console.log(location)
 
 
     const handleLogin = (event) => {
@@ -24,7 +28,8 @@ const Login = () => {
             const user = result.user
             console.log(user)
             toast.success('Login Successful!');
-            // form.reset();
+            form.reset();
+            navigate(location?.state ? location?.state : '/')
         })
         .catch((error) => {
             console.log(error)
@@ -73,17 +78,11 @@ const Login = () => {
                             <label className="">Confirm Password</label>
                             <div className="form-control">
                                 <input
-                                type="password"
+                                    type="password"
                                     name="password"
                                     placeholder="Confirm Password"
                                     className="input input-bordered -mt-1 " />
 
-                                {/* input field error show */}
-                                {/* <div>
-                                    {
-                                        loginError && <p className="text-[12px] text-red-500">{loginError}</p>
-                                    }
-                                </div> */}
                                 <label className="label">
                                     <Link to='/forgot-password' className="label-text-alt link link-hover">Forgot password?</Link>
                                 </label>
