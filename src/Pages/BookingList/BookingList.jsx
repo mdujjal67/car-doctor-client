@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import BookingRow from "./BookingRow";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const BookingList = () => {
 
@@ -10,9 +11,14 @@ const BookingList = () => {
 
     const url = user ? `http://localhost:5000/booking?email=${user.email}` : '';
     useEffect(() => {
-        fetch(url)
-            .then(res => res.json())
-            .then(data => setBookings(data))
+        // we can also fetch data using axios, here we don't need to convert data to the json format
+        axios.get(url, {withCredentials:true})
+        .then(res => {
+            setBookings(res.data)
+        })
+        // fetch(url)
+        //     .then(res => res.json())
+        //     .then(data => setBookings(data))
     }, [url]);
 
     const handleDelete = id => {

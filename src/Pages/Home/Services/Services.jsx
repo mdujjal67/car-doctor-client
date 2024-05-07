@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ServicesCard from "./ServicesCard";
+import { Link } from "react-router-dom";
 
 const Services = () => {
 
@@ -16,7 +17,7 @@ const Services = () => {
         <div className="my-[100px]">
             <div className="mb-12">
                 <h2 className="text-center text-xl font-bold text-orange-600">Services</h2>
-                <h1 className="text-center text-5xl font-bold py-5">Our Service Area</h1>
+                <Link to="/bookingList"><h1 className="text-center text-5xl font-bold py-5">Our Service Area</h1></Link>
                 <p className="mx-auto text-center lg:w-[720px] text-gray-600">The majority have suffered alteration in some form, by injected humour, or randomised words which do not look even slightly believable. </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">

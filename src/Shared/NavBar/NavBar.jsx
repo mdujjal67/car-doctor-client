@@ -55,12 +55,20 @@ const NavBar = () => {
                             </div>
                         </label>
                     )}
-                        {
-                            user?.email ? <button className="menu px-2 lg:mr-5 lg:ml-5 bg-[#ff3811] rounded-lg text-white hover:bg-gray-200 hover:text-gray-700" onClick={handleLogOut}>Log Out</button> : <button className="menu px-2 lg:mr-10 bg-[#ff3811] rounded-lg text-white hover:bg-gray-200 hover:text-gray-700"><Link to="/login">Login</Link></button>
-                        }
+                       <div className="md:block hidden">
+                            {
+                                user?.email ? <button className="menu px-2 lg:mr-5 lg:ml-5 bg-[#ff3811] rounded-lg text-white hover:bg-gray-200 hover:text-gray-700" onClick={handleLogOut}>Log Out</button> : <button className="menu px-2 lg:mr-10 bg-[#ff3811] rounded-lg text-white hover:bg-gray-200 hover:text-gray-700"><Link to="/login">Login</Link></button>
+                            }
+                        </div> 
                     <button><MdOutlineShoppingBag className="text-xl hover:text-orange-500" /></button>
                     <button><IoSearch className="text-xl mx-5 hover:text-orange-500" /></button>
                     <button className="btn btn-outline btn-warning hover:text-white">Appointment</button>
+
+                    <div className="md:hidden block flex-wrap ml-4">
+                       {
+                            user?.email ? <button className="menu px-2 lg:mr-5 lg:ml-5 bg-[#ff3811] rounded-lg text-white hover:bg-gray-200 hover:text-gray-700" onClick={handleLogOut}>Log Out</button> : <button className="menu px-2 lg:mr-10 bg-[#ff3811] rounded-lg text-white hover:bg-gray-200 hover:text-gray-700"><Link to="/login">Login</Link></button>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

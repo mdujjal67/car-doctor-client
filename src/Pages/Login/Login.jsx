@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import toast from "react-hot-toast";
+import axios from "axios";
 const Login = () => {
 
     const { signIn , googleLogin} = useContext(AuthContext);
@@ -29,7 +30,20 @@ const Login = () => {
             console.log(user)
             toast.success('Login Successful!');
             form.reset();
-            navigate(location?.state ? location?.state : '/')
+            // user navigation shifted to the axios point for success token
+            
+
+            // get access token ( first install axios packages, send only email as token & axios.post to backend with loggedInUser)
+            const loggedInUser = {email};
+            axios.post('http://localhost:5000/jwt', loggedInUser, {withCredentials:true})
+            .then(res => {
+                console.log(res.data)
+                if(res.data.success){
+                    navigate(location?.state ? location?.state : '/')
+                }
+            })
+
+
         })
         .catch((error) => {
             console.log(error)
@@ -41,7 +55,7 @@ const Login = () => {
         socialProvider()
             .then(result => {
                 if (result.user) {
-                    // navigate(from)
+                    navigate(location?.state ? location?.state : '/')
                 }
             })
     }
@@ -51,7 +65,7 @@ const Login = () => {
             .then(result => {
                 console.log(result.user)
                 toast.success('Login Successful!');
-                // navigate(from);
+                navigate(location?.state ? location?.state : '/')
             })
         
        
@@ -60,7 +74,7 @@ const Login = () => {
     return (
         <div>
             <div className="hero min-h-screen bg-gray-50 container mb-[80px] mx-auto py-10">
-                <div className="hero-content flex-row flex gap-20">
+                <div className="hero-content flex-col lg:flex-row flex gap-20">
                     <div className="lg:w-1/2">
                         <img src={loginImg} alt="" />
                     </div>

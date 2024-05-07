@@ -2,13 +2,15 @@ import { FcGoogle } from "react-icons/fc";
 import { IoLogoGithub } from "react-icons/io";
 // import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import loginImg from '../../assets/images/login/login.svg'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import toast from "react-hot-toast";
 const SignUp = () => {
     
     const { createUser } = useContext(AuthContext)
+    const navigate = useNavigate()
+    // const location = useLocation()
 
     const handleSignUp = (event) => {
         event.preventDefault()
@@ -24,12 +26,13 @@ const SignUp = () => {
             const user = result.user
             console.log(user)
             toast.success('User Registered Successfully!');
-            // form.reset();
+            form.reset();
+            navigate('/login')
             
         })
         .catch((error) => {
             console.log(error)
-            return toast.error('This User Already Exists!');
+            return toast.error('Please try again!');
         });
         
     }
