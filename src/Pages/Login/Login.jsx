@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import toast from "react-hot-toast";
-import axios from "axios";
+// import axios from "axios";
 const Login = () => {
 
     const { signIn , googleLogin} = useContext(AuthContext);
@@ -31,17 +31,19 @@ const Login = () => {
             toast.success('Login Successful!');
             form.reset();
             // user navigation shifted to the axios point for success token
+            navigate(location?.state ? location?.state : '/')
+
             
 
             // get access token ( first install axios packages, send only email as token & axios.post to backend with loggedInUser)
-            const loggedInUser = {email};
-            axios.post('http://localhost:5000/jwt', loggedInUser, {withCredentials:true})
-            .then(res => {
-                console.log(res.data)
-                if(res.data.success){
-                    navigate(location?.state ? location?.state : '/')
-                }
-            })
+            // const loggedInUser = {email};
+            // axios.post('http://localhost:5000/jwt', loggedInUser, {withCredentials:true})
+            // .then(res => {
+            //     console.log(res.data)
+            //     if(res.data.success){
+            //         navigate(location?.state ? location?.state : '/')
+            //     }
+            // })
 
 
         })
